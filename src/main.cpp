@@ -1,3 +1,5 @@
+/*StAuth10222: I Michael Mena, 000817498 certify that this material is my original work.
+No other person's work has been used without due acknowledgement. I have not made my work available to anyone else.*/
 #include <Arduino.h>
 #include <ESP8266WiFi.h>
 
@@ -62,15 +64,12 @@ void loop()
 {
   WiFiClient client = server.available();
 
-  // client.println("The temperature is " + (String)answer + " which is " + feels);
-  // delay(2000);
-
   // wait for a client (web browser) to connect
   if (client)
   {
     Serial.println("\n>> Client connected");
     Serial.println(">> Client request:");
-    client.println("<h1>Michael Mena, Student number 000817498</h1><table border='10' style='background-color: aqua; border-color: red blue gold teal'><tr><th>Temperature</th><th>It feels</th></tr>");
+    client.println("<table border='10' style='background-color: aqua; border-color: red blue gold teal'><tr><th>Temperature</th><th>It feels</th></tr>");
     while (client.connected())
     {
 
@@ -136,92 +135,3 @@ void loop()
     Serial.println(">> Client disconnected");
   }
 }
-
-/*
-// ******************************************************************
-// Dallas Semiconductor DS18B20 Temperature Sensor Demo Program
-// COMP-10184
-// Mohawk College
-
-// library for Arduino framework
-#include <Arduino.h>
-// 1-Wire sensor communication libary
-#include <OneWire.h>
-// DS18B20 sensor library
-#include <DallasTemperature.h>
-
-// Pin that the  DS18B20 is connected to
-const int oneWireBus = D3;
-
-// Setup a oneWire instance to communicate with any OneWire devices
-OneWire oneWire(oneWireBus);
-
-// Pass our oneWire reference to Dallas Temperature sensor
-DallasTemperature DS18B20(&oneWire);
-
-DeviceAddress address;
-
-boolean sensorFound = false;
-
-void setup()
-{
-
-  Serial.begin(115200);
-  if (DS18B20.getAddress(address, 0))
-  {
-
-    sensorFound = true;
-
-    for (uint8_t i = 0; i < 8; i++)
-    {
-      Serial.print(address[i], HEX);
-    }
-
-    DS18B20.begin();
-  }
-  else
-  {
-    Serial.println("Device sensor not found");
-  }
-}
-
-void loop()
-{
-  float answer;
-
-  // ask DS18B20 for the current temperature
-  DS18B20.requestTemperatures();
-
-  answer = DS18B20.getTempCByIndex(0);
-
-  String feels = "";
-
-  if (answer < 10)
-  {
-    feels += "Too cold!";
-  }
-  else if (answer < 15)
-  {
-    feels += "Cool";
-  }
-  else if (answer < 20)
-  {
-    feels += "Perfect";
-  }
-  else if (answer < 25)
-  {
-    feels += "Warm";
-  }
-  else if (answer < 30)
-  {
-    feels += "Hot";
-  }
-  else
-  {
-    feels += "Too Hot!";
-  }
-
-  Serial.println("The temperature is " + (String)answer + " which is " + feels);
-  delay(2000);
-}
-*/
